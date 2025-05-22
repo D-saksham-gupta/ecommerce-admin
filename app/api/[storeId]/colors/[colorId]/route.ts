@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { colorId: string } }
+  { params }: { params: Promise<{ colorId: string }> }
 ) {
   try {
     const { colorId } = await params;

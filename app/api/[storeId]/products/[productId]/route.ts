@@ -4,15 +4,16 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
-    if (!params.productId) {
+    const { productId } = await params;
+    if (!productId) {
       return new NextResponse("Product id is required", { status: 400 });
     }
     const product = await prismaClient.product.findUnique({
       where: {
-        id: params.productId,
+        id: productId,
       },
       include: {
         images: true,

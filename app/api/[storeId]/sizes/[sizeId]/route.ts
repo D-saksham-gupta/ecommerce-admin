@@ -4,15 +4,16 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { sizeId: string } }
+  { params }: { params: Promise<{ sizeId: string }> }
 ) {
   try {
-    if (!params.sizeId) {
+    const { sizeId } = await params;
+    if (!sizeId) {
       return new NextResponse("Size id is required", { status: 400 });
     }
     const size = await prismaClient.size.findUnique({
       where: {
-        id: params.sizeId,
+        id: sizeId,
       },
     });
     return NextResponse.json(size);

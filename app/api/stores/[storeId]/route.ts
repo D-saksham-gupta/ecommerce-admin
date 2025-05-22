@@ -4,24 +4,25 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: Promise<{ storeId: string }> }
 ) {
   try {
     const { userId } = await auth();
     const body = await req.json();
     const { name } = await body;
+    const { storeId } = await params;
     if (!userId) {
       return new NextResponse("Unauthenticates", { status: 401 });
     }
     if (!name) {
       return new NextResponse("Name rquired", { status: 400 });
     }
-    if (!params.storeId) {
+    if (!storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
     const store = await prismaClient.store.updateMany({
       where: {
-        id: params.storeId,
+        id: storeId,
       },
       data: {
         name,

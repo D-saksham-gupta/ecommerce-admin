@@ -4,15 +4,16 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { billboardId: string } }
+  { params }: { params: Promise<{ billboardId: string }> }
 ) {
   try {
-    if (!params.billboardId) {
+    const { billboardId } = await params;
+    if (!billboardId) {
       return new NextResponse("Billboard id is required", { status: 400 });
     }
     const billboard = await prismaClient.billboard.findUnique({
       where: {
-        id: params.billboardId,
+        id: billboardId,
       },
     });
     return NextResponse.json(billboard);
