@@ -1,6 +1,8 @@
 import prismaClient from "@/lib/prismadb";
 import { BillboardForm } from "./components/billboard-form";
 
+type tParams = Promise<{ slug: string[] }>;
+
 const BillboardPage = async ({
   params,
 }: {
