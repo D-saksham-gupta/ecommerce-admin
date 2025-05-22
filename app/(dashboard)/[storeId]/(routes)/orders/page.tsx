@@ -7,7 +7,7 @@ import { formatter } from "@/lib/utils";
 export default async function OrdersPage({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const { storeId } = await params;
   const orders = await prismaClient.order.findMany({

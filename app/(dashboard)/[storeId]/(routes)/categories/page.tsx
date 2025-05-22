@@ -6,7 +6,7 @@ import { CategoryColumn } from "./components/columns";
 export default async function CategoriesPage({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const { storeId } = await params;
   const categories = await prismaClient.category.findMany({

@@ -6,7 +6,7 @@ import { SizeColumn } from "./components/columns";
 export default async function SizesPage({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const { storeId } = await params;
   const sizes = await prismaClient.size.findMany({

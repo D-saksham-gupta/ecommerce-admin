@@ -6,7 +6,7 @@ import { BillboardColumn } from "./components/columns";
 export default async function Billboards({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const { storeId } = await params;
   const billboards = await prismaClient.billboard.findMany({

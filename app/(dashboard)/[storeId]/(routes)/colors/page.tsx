@@ -6,7 +6,7 @@ import { ColorColumn } from "./components/columns";
 export default async function ColorsPage({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const { storeId } = await params;
   const colors = await prismaClient.color.findMany({

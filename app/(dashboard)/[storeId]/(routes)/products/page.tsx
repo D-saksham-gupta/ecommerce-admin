@@ -7,7 +7,7 @@ import { formatter } from "@/lib/utils";
 export default async function ProductsPage({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const { storeId } = await params;
   const products = await prismaClient.product.findMany({
