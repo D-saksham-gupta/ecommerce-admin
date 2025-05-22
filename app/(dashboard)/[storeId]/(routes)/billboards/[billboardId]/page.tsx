@@ -1,14 +1,12 @@
 import prismaClient from "@/lib/prismadb";
 import { BillboardForm } from "./components/billboard-form";
 
-type tParams = Promise<{ slug: string[] }>;
-
 const BillboardPage = async ({
   params,
 }: {
   params: { billboardId: string };
 }) => {
-  const { billboardId } = await params;
+  const { billboardId } = params;
   const billboard = await prismaClient.billboard.findUnique({
     where: {
       id: billboardId,
