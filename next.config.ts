@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   swcMinify: false, // Disable minification that might catch errors
   experimental: {
     forceSwcTransforms: false,
-  }
+  },
   images: {
     remotePatterns: [
       {
