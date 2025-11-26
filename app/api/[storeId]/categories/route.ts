@@ -60,6 +60,9 @@ export async function GET(
     }
 
     const categories = await prismaClient.category.findMany({
+      include: {
+        billboard: true,
+      },
       where: {
         storeId,
       },
